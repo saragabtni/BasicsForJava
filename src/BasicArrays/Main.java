@@ -38,11 +38,16 @@ public class Main {
         System.out.println(firstArray[0]); //output : 20
 
         //fill
-
-
+        int[] thirdArray = new int[10];
+        Arrays.fill(thirdArray,20);
+        for (int ir : thirdArray){
+            System.out.println(ir);
+        } //output : array filled with the value 20 (10times)
 
         //mismatch
-
+        //return the index of the element in which the 2 arrays are different
+        System.out.println(Arrays.mismatch(firstArray,secondArray));
+        
         //deepEquals vs equals
 
 
