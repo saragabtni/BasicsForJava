@@ -2,14 +2,21 @@ package BasicArrays;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.BinaryOperator;
+import java.util.function.IntBinaryOperator;
+import java.util.function.IntUnaryOperator;
 
+/**
+ * Explore some Arrays methods
+ * Java 11
+ */
 public class Main {
 
     public static void main(String[] args) {
         //Arrays declaration & instantiation
+        //we can't add new element to the arrays, if we want we use an other array , fill it and return the new array
         int[] firstArray = new int[]{20,30,40,30,60,20,20};
         int[] secondArray = new int[]{20,30,40,50};
-        //we can't add new element to the arrays, if we want we use an other array , fill it and return the new array
 
         //Compare Method
         int i = Arrays.compare(firstArray,secondArray);
@@ -19,7 +26,7 @@ public class Main {
         int k = Arrays.compare(secondArray,0,3,firstArray,0,6);
         System.out.println("result: "+k);
 
-        //Binary search
+        //BinarySearch method
         //the array must be sorted before applying binary search
         //if the array is not sorted we will get undefined result
         Arrays.sort(firstArray);
@@ -37,18 +44,42 @@ public class Main {
         //the original array is not modified
         System.out.println(firstArray[0]); //output : 20
 
-        //fill
+        //fill method
         int[] thirdArray = new int[10];
         Arrays.fill(thirdArray,20);
         for (int ir : thirdArray){
             System.out.println(ir);
         } //output : array filled with the value 20 (10times)
 
-        //mismatch
+        //mismatch method
         //return the index of the element in which the 2 arrays are different
         System.out.println(Arrays.mismatch(firstArray,secondArray));
-        
-        //deepEquals vs equals
+
+        //deepEquals vs equals methods
+        Object[] obj1 = new Object[]{"30",new String[]{"one"}};
+        Object[] obj2 = new Object[]{"30",new String[]{"one"}};
+        System.out.println(Arrays.equals(obj1,obj2)); //false
+        System.out.println(Arrays.deepEquals(obj1,obj2)); //true
+        System.out.println(obj1.equals(obj2)); //false
+
+        //parallelPrefix method
+        int[] fourthArray = new int[]{20,30,40,50};
+        IntBinaryOperator op = (i1, i2) -> i1 +i2;
+        Arrays.parallelPrefix(fourthArray, op);
+        Arrays.stream(fourthArray).sequential().forEach(e->{
+            System.out.println("element: " + e);
+        });//output: 20 50 90 140
+
+      //  BinaryOperator<Integer> op2 = (i1, i2) -> i1 + 10;
+      //  Arrays.parallelPrefix(fourthArray, (IntBinaryOperator) op2); // => classCastException
+
+        // parallelSetAll method
+        int[] fifthArray = new int[]{1,2,3,4};
+        IntUnaryOperator uop = (o) -> o+1;
+        Arrays.parallelSetAll(fifthArray,uop);
+        Arrays.stream(fifthArray).forEach(r->{
+            System.out.println("elem: "+r);
+        });
 
 
     }
