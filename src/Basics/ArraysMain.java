@@ -1,9 +1,8 @@
-package BasicArrays;
+package Basics;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Spliterator;
-import java.util.function.BinaryOperator;
 import java.util.function.IntBinaryOperator;
 import java.util.function.IntConsumer;
 import java.util.function.IntUnaryOperator;
@@ -12,7 +11,7 @@ import java.util.function.IntUnaryOperator;
  * Explore some Arrays methods
  * Java 11
  */
-public class Main {
+public class ArraysMain {
 
     public static void main(String[] args) {
         //Arrays declaration & instantiation
@@ -94,6 +93,22 @@ public class Main {
         Spliterator.OfInt b = Arrays.spliterator(fifthArray);
         IntConsumer consumer = e -> System.out.println("res: "+e);
         b.forEachRemaining(consumer);
+
+        // Multidimensional arrays
+        String [][] multiString = new String[3][2];
+        multiString[0] = new String[]{"a","b"};
+        multiString[1] = new String[]{"aa","bb"};
+        multiString[2] = new String[]{"aaa","bbb"};
+        Arrays.stream(multiString).forEach(e-> System.out.println(e[0]+","+e[1]));
+
+        int[][] multiInt = {{1,2},{3,4},{5,6}};
+        Arrays.stream(multiInt).forEach(e-> System.out.println(e[0]+","+e[1]));
+
+        int[][] other = new int[3][];
+        other[0] = new int[2];
+        other[0] = new int[5];
+        other[0] = new int[1];
+
 
 
 
