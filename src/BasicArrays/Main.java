@@ -2,8 +2,10 @@ package BasicArrays;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Spliterator;
 import java.util.function.BinaryOperator;
 import java.util.function.IntBinaryOperator;
+import java.util.function.IntConsumer;
 import java.util.function.IntUnaryOperator;
 
 /**
@@ -64,7 +66,7 @@ public class Main {
 
         //parallelPrefix method
         int[] fourthArray = new int[]{20,30,40,50};
-        IntBinaryOperator op = (i1, i2) -> i1 +i2;
+        IntBinaryOperator op = (i1, i2) -> i1 +i2; // i1,i2 are values from the array
         Arrays.parallelPrefix(fourthArray, op);
         Arrays.stream(fourthArray).sequential().forEach(e->{
             System.out.println("element: " + e);
@@ -75,11 +77,24 @@ public class Main {
 
         // parallelSetAll method
         int[] fifthArray = new int[]{1,2,3,4};
-        IntUnaryOperator uop = (o) -> o+1;
+        IntUnaryOperator uop = (o) -> {return o;}; //o is the index of each value in the array
         Arrays.parallelSetAll(fifthArray,uop);
         Arrays.stream(fifthArray).forEach(r->{
-            System.out.println("elem: "+r);
+            System.out.println("elem: "+r);//output:  0 1 2 3
         });
+
+        //setAll method
+        IntUnaryOperator uop2 = (o) -> {return 20+o;}; //o is the index of each value in the array
+        Arrays.setAll(fifthArray,uop2);
+        Arrays.stream(fifthArray).forEach(r->{
+            System.out.println("elem: "+r);//output: 20 21 22 23
+        });
+
+        //spliterator
+        Spliterator.OfInt b = Arrays.spliterator(fifthArray);
+        IntConsumer consumer = e -> System.out.println("res: "+e);
+        b.forEachRemaining(consumer);
+
 
 
     }
