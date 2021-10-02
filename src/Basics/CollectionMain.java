@@ -1,6 +1,7 @@
 package Basics;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class CollectionMain {
     public static void main(String[] args) {
@@ -27,18 +28,27 @@ public class CollectionMain {
 
 
         //TreeSet ==> sorted order
+        //TreeSet class implements NavigableSet interface, NavigableSet extends SortedSet interface , SortedSet extends Set interface
         Set<Integer>  treeSet = new TreeSet<>();
         Set<Integer>  treeSet2 = new TreeSet<>();
         treeSet.add(10);treeSet.add(1);treeSet.add(12);
         //treeSet.add(null); ==> will throw NullPointerException: TreeSet doesn't accept null values
         System.out.println(treeSet);
-        //compare in treeset uses compare method
+        //compare in TreeSet uses compare method
 
-        //SortedSet
+        // ConcurrentSkipListSet class implements NavigableSet interface
+        NavigableSet<Integer> nav = new ConcurrentSkipListSet<>();
+        // ==> it's thread safe
+        nav.add(1);nav.add(10);nav.add(20);nav.add(30);nav.add(50);
+        System.out.println(nav.ceiling(25)); //output : 30 ==> the least element greater or equals to the parameter
+        System.out.println(nav.floor(25)); //output : 20 ==> the least element less or equals to the parameter
+        System.out.println(nav.higher(20)); //output : 30 ==> the least element greater than the parameter
+        System.out.println(nav.lower(20)); //output : 10 ==> the least element less  to the parameter
+
+
 
         //LinkedHashset
 
-        //NavigableSet
 
     }
 }
