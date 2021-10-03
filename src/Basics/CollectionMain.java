@@ -46,8 +46,33 @@ public class CollectionMain {
         System.out.println(nav.lower(20)); //output : 10 ==> the least element less  to the parameter
 
 
-
         //LinkedHashset
+        Set<Integer> lst = new LinkedHashSet<>();
+        //LinkedHashset maintains the elements ordered oh their insertion
+        lst.add(1);
+
+        //Map
+        System.out.println("                ********************************** MAP ********************************               ");
+        Map<Integer,String> map = new HashMap<>();
+        map.put(1,"a");
+        map.put(2,"b");
+
+        Map<Integer,String> sortedMap = new TreeMap<>();
+        sortedMap.put(12,"aa");
+        sortedMap.put(2,"bb");
+
+        map.putAll(sortedMap);
+        map.putIfAbsent(1,"c");
+        map.computeIfPresent(2,(i,j)-> {return "map:"+i+j;});
+        map.computeIfPresent(3,(i,j)-> {return "map:"+i+"**"+j;}); // will not compute it because key 3 doesn't exist
+        map.computeIfAbsent(4, (i)-> {return i+"test";});
+        map.computeIfAbsent(1, (i)-> {return i+"test";});// will not compute it because key 1 already exists
+        map.forEach((e,t)-> System.out.println(map.get(e)));
+        System.out.println(map.entrySet()); // output a set: [1=a, 2=map:2bb, 4=4test, 12=aa]
+        System.out.println(map.keySet()); // [1, 2, 4, 12]
+
+        //Iterator
+
 
 
     }
